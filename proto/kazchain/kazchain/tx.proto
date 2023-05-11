@@ -1,7 +1,40 @@
 syntax = "proto3";
+
 package kazchain.kazchain;
+
+import "kazchain/kazchain/article.proto";
 
 option go_package = "kazchain/x/kazchain/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc CreateArticle (MsgCreateArticle) returns (MsgCreateArticleResponse);
+  rpc UpdateArticle (MsgUpdateArticle) returns (MsgUpdateArticleResponse);
+  rpc DeleteArticle (MsgDeleteArticle) returns (MsgDeleteArticleResponse);
+}
+message MsgCreateArticle {
+  string creator = 1;
+  string name    = 2;
+  string value   = 3;
+}
+
+message MsgCreateArticleResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateArticle {
+  string creator = 1;
+  uint64 id      = 2;
+  string name    = 3;
+  string value   = 4;
+}
+
+message MsgUpdateArticleResponse {}
+
+message MsgDeleteArticle {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteArticleResponse {}
+

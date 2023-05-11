@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package kazchain.kazchain;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "kazchain/kazchain/params.proto";
+import "kazchain/kazchain/article.proto";
 
 option go_package = "kazchain/x/kazchain/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/kazchain/kazchain/params";
+  
+  }
+  
+  // Queries a list of Article items.
+  rpc Article    (QueryGetArticleRequest) returns (QueryGetArticleResponse) {
+    option (google.api.http).get = "/kazchain/kazchain/article/{id}";
+  
+  }
+  rpc ArticleAll (QueryAllArticleRequest) returns (QueryAllArticleResponse) {
+    option (google.api.http).get = "/kazchain/kazchain/article";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetArticleRequest {
+  uint64 id = 1;
+}
+
+message QueryGetArticleResponse {
+  Article Article = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllArticleRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllArticleResponse {
+  repeated Article                                Article    = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

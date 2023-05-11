@@ -1,0 +1,11 @@
+syntax = "proto3";
+package kazchain.kazchain;
+
+option go_package = "kazchain/x/kazchain/types";
+
+message Article {
+  uint64 id = 1;
+  string name = 2; 
+  string value = 3; 
+  string creator = 4;
+}
