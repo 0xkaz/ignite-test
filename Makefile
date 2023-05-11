@@ -1,0 +1,3 @@
+build:
+	ignite chain build 
+	
