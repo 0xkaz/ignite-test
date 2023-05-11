@@ -1,0 +1,7 @@
+syntax = "proto3";
+package kazchain.kazchain;
+
+option go_package = "kazchain/x/kazchain/types";
+
+// Msg defines the Msg service.
+service Msg {}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package kazchain.kazchain;
+
+import "gogoproto/gogo.proto";
+import "kazchain/kazchain/params.proto";
+
+option go_package = "kazchain/x/kazchain/types";
+
+// GenesisState defines the kazchain module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

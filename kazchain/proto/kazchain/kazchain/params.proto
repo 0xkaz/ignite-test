@@ -1,0 +1,12 @@
+syntax = "proto3";
+package kazchain.kazchain;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "kazchain/x/kazchain/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
